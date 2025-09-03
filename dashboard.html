@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Skills - TradeASkill</title>
+    <meta name="description" content="Discover amazing skills available for trading on TradeASkill. Find your perfect skill exchange partner.">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav-brand">
+                <a href="index.html"><h1>TradeASkill</h1></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html" class="active">Browse Skills</a></li>
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a href="#" class="btn btn-secondary">Sign Out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <section class="dashboard-header">
+                <h2>Discover Skills to Learn</h2>
+                <p>Find the perfect skill trading partner and start your learning journey</p>
+            </section>
+
+            <section class="search-filters">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="search" id="skillSearch" placeholder="Search skills..." 
+                               class="search-input">
+                        <button class="search-button" aria-label="Search">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="filters">
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="technology">Technology</option>
+                            <option value="languages">Languages</option>
+                            <option value="arts">Arts & Creative</option>
+                            <option value="music">Music</option>
+                            <option value="business">Business</option>
+                            <option value="cooking">Cooking</option>
+                            <option value="sports">Sports & Fitness</option>
+                        </select>
+
+                        <select id="levelFilter" class="filter-select">
+                            <option value="">All Levels</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="skills-section">
+                <div class="skills-header">
+                    <h3>Available Skills</h3>
+                    <div class="view-toggle">
+                        <button id="gridView" class="view-btn active" aria-label="Grid view">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                        </button>
+                        <button id="listView" class="view-btn" aria-label="List view">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="8" y1="6" x2="21" y2="6"></line>
+                                <line x1="8" y1="12" x2="21" y2="12"></line>
+                                <line x1="8" y1="18" x2="21" y2="18"></line>
+                                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="skillsContainer" class="skills-grid">
+                    <!-- Skills will be dynamically loaded here -->
+                </div>
+
+                <div id="noResultsMessage" class="no-results" style="display: none;">
+                    <h3>No skills found</h3>
+                    <p>Try adjusting your search terms or filters</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
