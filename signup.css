@@ -1,0 +1,204 @@
+/* ==========================================================================
+   1. VARIABLES & BASE STYLES
+   ========================================================================== */
+:root {
+    /* Colors */
+    --primary-color: #2563eb;
+    --primary-light: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --success-color: #059669;
+    --error-color: #dc2626;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --text-light: #9ca3af;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --border-color: #e5e7eb;
+
+    /* Spacing & Sizing */
+    --border-radius: 8px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    
+    /* Shadows */
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   2. GENERAL & UTILITY STYLES
+   ========================================================================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.header {
+    background-color: var(--bg-primary);
+    box-shadow: var(--shadow);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-md);
+}
+
+.nav-brand a { text-decoration: none; }
+.nav-brand h1 { color: var(--primary-color); font-size: 24px; font-weight: 700; }
+.nav-links { display: flex; list-style: none; align-items: center; gap: var(--spacing-lg); }
+.nav-links a { text-decoration: none; color: var(--text-primary); font-weight: 500; transition: color 0.2s ease; }
+.nav-links a:hover { color: var(--primary-color); }
+
+.btn {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+.btn-primary { background-color: var(--primary-color); color: white; }
+.btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.btn-large { padding: var(--spacing-md) var(--spacing-xl); font-size: 16px; }
+.btn-full { width: 100%; }
+
+/* ==========================================================================
+   3. PAGE-SPECIFIC LAYOUT & COMPONENTS
+   ========================================================================== */
+.signup-main {
+    margin-top: 80px;
+    padding: var(--spacing-2xl) 0;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+}
+
+.signup-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--bg-primary);
+    padding: var(--spacing-2xl);
+    border-radius: calc(var(--border-radius) * 2);
+    box-shadow: var(--shadow-lg);
+}
+
+.signup-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+.signup-header h2 { font-size: 32px; font-weight: 700; margin-bottom: var(--spacing-sm); }
+.signup-header p { color: var(--text-secondary); font-size: 16px; }
+
+/* --- Form Styles --- */
+.signup-form { display: flex; flex-direction: column; gap: var(--spacing-lg); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
+.form-group { display: flex; flex-direction: column; gap: var(--spacing-xs); }
+.form-group label { font-weight: 600; font-size: 14px; }
+.form-group input,
+.form-group textarea {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+/* --- Form Validation States --- */
+.error-message { color: var(--error-color); font-size: 12px; min-height: 16px; }
+.form-group.error input,
+.form-group.error textarea { border-color: var(--error-color); }
+.form-group.success input,
+.form-group.success textarea { border-color: var(--success-color); }
+
+/* --- Checkbox Styles --- */
+.checkbox-group { margin: var(--spacing-md) 0; }
+.checkbox-label { display: flex; align-items: flex-start; gap: var(--spacing-sm); cursor: pointer; font-size: 14px; line-height: 1.5; }
+.checkbox-label input[type="checkbox"] { position: absolute; opacity: 0; }
+.checkmark { width: 20px; height: 20px; border: 2px solid var(--border-color); border-radius: 4px; flex-shrink: 0; position: relative; transition: all 0.2s ease; }
+.checkbox-label input[type="checkbox"]:checked + .checkmark { background-color: var(--primary-color); border-color: var(--primary-color); }
+.checkbox-label input[type="checkbox"]:checked + .checkmark:after { content: ''; position: absolute; left: 6px; top: 2px; width: 5px; height: 10px; border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.checkbox-label a { color: var(--primary-color); text-decoration: none; }
+.checkbox-label a:hover { text-decoration: underline; }
+
+/* --- Footer & Success Message --- */
+.signup-footer { text-align: center; margin-top: var(--spacing-lg); padding-top: var(--spacing-lg); border-top: 1px solid var(--border-color); }
+.signup-footer a { color: var(--primary-color); text-decoration: none; font-weight: 600; }
+.signup-footer a:hover { text-decoration: underline; }
+
+.success-message { text-align: center; padding: var(--spacing-xl); background-color: #f0fdf4; border: 2px solid var(--success-color); border-radius: var(--border-radius); margin-top: var(--spacing-lg); }
+.success-message h3 { color: var(--success-color); font-size: 20px; font-weight: 600; margin-bottom: var(--spacing-sm); }
+.success-message p { color: var(--text-secondary); }
+
+/* ==========================================================================
+   4. STATE & ANIMATION STYLES
+   ========================================================================== */
+.btn.loading { position: relative; color: transparent; }
+.btn.loading:after {
+    content: '';
+    position: absolute;
+    width: 16px; height: 16px;
+    top: 50%; left: 50%;
+    margin-left: -8px; margin-top: -8px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    color: white;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   5. RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 768px) {
+    .signup-main { padding: var(--spacing-md) 0; }
+    .signup-container { padding: var(--spacing-lg); margin: var(--spacing-md); }
+    .signup-header h2 { font-size: 28px; }
+    .form-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .nav-links { display: none; }
+    .signup-header h2 { font-size: 24px; }
+    .signup-container { padding: var(--spacing-md); margin: var(--spacing-sm); }
+}
