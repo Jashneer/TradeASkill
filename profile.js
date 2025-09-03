@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (skills && skills.length > 0) {
             container.innerHTML = skills.map(skill => createSkillTag(skill, type)).join('');
         } else {
-            container.innerHTML = <p class="empty-skills">No skills added yet.</p>;
+            container.innerHTML = `<p class="empty-skills">No skills added yet.</p>`;
         }
     }
 
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         document.head.appendChild(style);
     }
-    });
     
     // Starts the page logic.
     initializeProfile();
+});
