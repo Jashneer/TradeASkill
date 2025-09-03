@@ -135,14 +135,14 @@ document.addEventListener('DOMContentLoaded', function() {
         contactButtons.forEach(function(button) {
             button.addEventListener('click', function() {
                 const teacherName = this.dataset.teacherName;
-                alert(Viewing profile of ${teacherName}. This would open their detailed profile page.);
+                alert(`Viewing profile of ${teacherName}. This would open their detailed profile page.`);
             });
         });
 
         tradeButtons.forEach(function(button) {
             button.addEventListener('click', function() {
                 const skillTitle = this.dataset.skillTitle;
-                alert(Requesting trade for "${skillTitle}". This would open a trade request form.);
+                alert(`Requesting trade for "${skillTitle}". This would open a trade request form.`);
             });
         });
     }
