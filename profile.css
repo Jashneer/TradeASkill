@@ -2,32 +2,24 @@
    1. VARIABLES & BASE STYLES
    ========================================================================== */
 :root {
-    /* Colors */
     --primary-color: #2563eb;
     --primary-light: #3b82f6;
     --primary-dark: #1d4ed8;
-    --success-color: #059669;
-    --error-color: #dc2626;
     --text-primary: #111827;
     --text-secondary: #6b7280;
-    --text-light: #9ca3af;
     --bg-primary: #ffffff;
     --bg-secondary: #f9fafb;
     --bg-accent: #f3f4f6;
     --border-color: #e5e7eb;
 
-    /* Spacing & Sizing */
     --border-radius: 8px;
-    --spacing-xs: 4px;
     --spacing-sm: 8px;
     --spacing-md: 16px;
     --spacing-lg: 24px;
     --spacing-xl: 32px;
-    --spacing-2xl: 48px;
 
-    /* Shadows */
-    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 * {
@@ -37,24 +29,17 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    line-height: 1.6;
-    color: var(--text-primary);
+    font-family: system-ui, sans-serif;
     background-color: var(--bg-secondary);
-    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
 }
 
 /* ==========================================================================
-   2. GENERAL & UTILITY STYLES
+   2. HEADER & NAV
    ========================================================================== */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-md);
-}
-
 .header {
-    background-color: var(--bg-primary);
+    background: var(--bg-primary);
     box-shadow: var(--shadow);
     position: fixed;
     top: 0;
@@ -66,23 +51,25 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-md) var(--spacing-md);
+    padding: var(--spacing-md);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.nav-brand a {
+    text-decoration: none;   
+    color: inherit;          
 }
 
-.nav-brand a {
-    text-decoration: none;
-}
 
 .nav-brand h1 {
-    color: var(--primary-color);
     font-size: 24px;
-    font-weight: 700;
+    color: var(--primary-color);
+  
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-    align-items: center;
     gap: var(--spacing-lg);
 }
 
@@ -90,65 +77,67 @@ body {
     text-decoration: none;
     color: var(--text-primary);
     font-weight: 500;
-    transition: color 0.2s ease;
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: var(--spacing-sm);
     border-radius: var(--border-radius);
 }
 
 .nav-links a:hover,
 .nav-links a.active {
+    text-decoration: none;
+    background: var(--bg-accent);
     color: var(--primary-color);
-    background-color: var(--bg-secondary);
 }
 
 .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-xs);
     padding: var(--spacing-sm) var(--spacing-md);
-    border: none;
     border-radius: var(--border-radius);
-    text-decoration: none;
-    text-align: center;
     font-weight: 600;
-    font-size: 14px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    border: none;
+    transition: 0.2s ease;
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
+    background: var(--primary-color);
     color: white;
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-lg);
 }
 
 .btn-secondary {
-    background-color: transparent;
-    color: var(--primary-color);
     border: 2px solid var(--primary-color);
-}
-
-.btn-secondary:hover {
-    background-color: var(--primary-color);
-    color: white;
+    color: var(--primary-color);
+    background: transparent;
 }
 
 .btn-small {
-    padding: var(--spacing-xs) var(--spacing-sm);
     font-size: 12px;
+    padding: 4px 8px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    text-decoration: none; /* Ensure link looks like button */
+    display: inline-block;
+    transition: all 0.2s ease;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    background: transparent;
+}
+.btn-small:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+.profile-actions .btn-primary:hover {
+    background-color: var(--primary-dark); /* slightly darker shade */
+    transform: translateY(-2px); /* subtle lift effect */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* shadow for depth */
 }
 
 /* ==========================================================================
-   3. PAGE-SPECIFIC LAYOUT & COMPONENTS
+   3. PROFILE LAYOUT
    ========================================================================== */
 .profile-main {
     margin-top: 80px;
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-xl) var(--spacing-md);
 }
 
 .profile-container {
@@ -156,21 +145,17 @@ body {
     margin: 0 auto;
 }
 
-/* --- Profile Header --- */
+/* Profile Header */
 .profile-header {
-    background-color: var(--bg-primary);
+    background: var(--bg-primary);
     border-radius: var(--border-radius);
-    padding: var(--spacing-2xl);
-    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-xl);
     box-shadow: var(--shadow);
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: var(--spacing-xl);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
     align-items: center;
-}
-
-.profile-avatar {
-    position: relative;
+    margin-bottom: var(--spacing-xl);
 }
 
 .avatar-circle {
@@ -182,48 +167,29 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 32px;
-    font-weight: 700;
-    color: white;
+    color: #fff;
+    font-weight: bold;
     box-shadow: var(--shadow-lg);
 }
 
-.avatar-edit-btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 32px;
-    height: 32px;
-    background-color: var(--bg-primary);
-    border: 2px solid var(--border-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.avatar-edit-btn:hover {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
+.profile-info {
+    flex: 1;
 }
 
 .profile-info h2 {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
-    margin-bottom: var(--spacing-xs);
+    margin-bottom: 4px;
 }
 
 .user-email {
     color: var(--text-secondary);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: 8px;
 }
 
 .user-bio {
     color: var(--text-secondary);
-    line-height: 1.5;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: 16px;
 }
 
 .profile-stats {
@@ -233,260 +199,68 @@ body {
 
 .stat {
     text-align: center;
+        
 }
-
 .stat-number {
-    display: block;
     font-size: 24px;
+    display: block;
     font-weight: 700;
     color: var(--primary-color);
 }
-
 .stat-label {
-    font-size: 12px;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    font-weight: 600;
-}
+      font-size: 14px;
+      color: var(--text-secondary); 
+      text-transform: uppercase; 
+      font-weight: 700;
+    }
 
-/* --- Profile Content Sections --- */
-.profile-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xl);
-}
-
+/* ==========================================================================
+   4. SKILLS SECTIONS
+   ========================================================================== */
 .skills-section {
-    background-color: var(--bg-primary);
+    background: var(--bg-primary);
     border-radius: var(--border-radius);
     padding: var(--spacing-xl);
     box-shadow: var(--shadow);
+    margin-bottom: var(--spacing-xl);
 }
 
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-lg);
-}
-
-.section-header h3 {
-    font-size: 20px;
-    font-weight: 600;
+    margin-bottom: var(--spacing-md);
 }
 
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: var(--spacing-md);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
 }
 
 .skill-tag {
-    background-color: var(--bg-accent);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-sm) var(--spacing-md);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-.skill-tag:hover {
-    background-color: var(--bg-secondary);
-    border-color: var(--primary-light);
-}
-
-.skill-tag.teaching {
-    border-left: 4px solid var(--success-color);
-}
-
-.skill-tag.learning {
-    border-left: 4px solid var(--primary-color);
-}
-
-.skill-name {
+    background: var(--bg-accent);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 14px;
+    color: var(--primary-color);
     font-weight: 500;
 }
 
-.skill-remove {
-    background: none;
-    border: none;
-    color: var(--text-light);
-    cursor: pointer;
-    padding: var(--spacing-xs);
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.skill-remove:hover {
-    color: var(--error-color);
-    background-color: rgba(220, 38, 38, 0.1);
-}
-
-/* --- Modal Styles --- */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    animation: fadeIn 0.3s ease;
-}
-
-.modal-content {
-    background-color: var(--bg-primary);
-    border-radius: var(--border-radius);
-    padding: 0;
-    max-width: 500px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    animation: slideUp 0.3s ease;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing-lg);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.modal-header h3 {
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text-secondary);
-    padding: var(--spacing-xs);
-    border-radius: 4px;
-    transition: all 0.2s ease;
-}
-
-.modal-close:hover {
-    color: var(--text-primary);
-    background-color: var(--bg-accent);
-}
-
-.edit-form {
-    padding: var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-}
-
-.form-group label {
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.form-group input,
-.form-group textarea {
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: 2px solid var(--border-color);
-    border-radius: var(--border-radius);
-    font-size: 16px;
-    transition: border-color 0.2s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-.form-actions {
-    display: flex;
-    gap: var(--spacing-md);
-    justify-content: flex-end;
-    margin-top: var(--spacing-md);
-}
-
 /* ==========================================================================
-   4. ANIMATIONS
-   ========================================================================== */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* ==========================================================================
-   5. RESPONSIVE DESIGN
+   5. RESPONSIVE
    ========================================================================== */
 @media (max-width: 768px) {
     .profile-header {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         text-align: center;
-        gap: var(--spacing-lg);
     }
-
     .profile-stats {
         justify-content: center;
     }
-
-    .profile-actions {
-        justify-self: center;
-    }
-
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-
     .section-header {
         flex-direction: column;
-        gap: var(--spacing-md);
-        align-items: flex-start;
-    }
-
-    .modal-content {
-        width: 95%;
-    }
-
-    .form-actions {
-        flex-direction: column;
+        gap: var(--spacing-sm);
     }
 }
 
@@ -494,26 +268,9 @@ body {
     .nav-links {
         display: none;
     }
-
-    .profile-header {
-        padding: var(--spacing-lg);
-    }
-
     .avatar-circle {
         width: 80px;
         height: 80px;
         font-size: 24px;
-    }
-
-    .profile-info h2 {
-        font-size: 24px;
-    }
-
-    .profile-stats {
-        gap: var(--spacing-md);
-    }
-
-    .skills-section {
-        padding: var(--spacing-lg);
     }
 }
