@@ -185,10 +185,5 @@ const currentUserData = {
     avatar: null
 };
 
-// Export data for other scripts to use
-// if (typeof module !== 'undefined' && module.exports) {
-    // module.exports = { skillsData, currentUserData };
-// }
-
 window.skillsData = skillsData;
 window.currentUserData = currentUserData;

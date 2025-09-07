@@ -17,18 +17,18 @@ body {
     --primary-color: #2563eb;
     --primary-light: #3b82f6;
     --primary-dark: #1d4ed8;
-    --secondary-color: #059669;
-    --secondary-light: #10b981;
-    --accent-color: #ea580c;
-    --success-color: #059669;
-    --warning-color: #d97706;
-    --error-color: #dc2626;
+    --secondary-color: #059669; /* Unused in this file, but good to keep for consistency */
+    --secondary-light: #10b981; /* Unused */
+    --accent-color: #ea580c; /* Unused */
+    --success-color: #059669; /* Unused */
+    --warning-color: #d97706; /* Unused */
+    --error-color: #dc2626; /* Unused */
     --text-primary: #111827;
     --text-secondary: #6b7280;
     --text-light: #9ca3af;
     --bg-primary: #ffffff;
     --bg-secondary: #f9fafb;
-    --bg-accent: #f3f4f6;
+    --bg-accent: #f3f4f6; /* Unused */
     --border-color: #e5e7eb;
     --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -104,7 +104,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-md) var(--spacing-md);
+    padding: var(--spacing-md); /* Consistent padding */
 }
 
 .nav-brand h1 {
@@ -112,7 +112,12 @@ body {
     font-size: 24px;
     font-weight: 700;
 }
+.nav-brand a {
+    text-decoration: none; /* Remove underline from brand link */
+}
 
+
+/* Navigation Links (Desktop First) */
 .nav-links {
     display: flex;
     list-style: none;
@@ -131,23 +136,34 @@ body {
     color: var(--primary-color);
 }
 
-.nav-toggle {
-    display: none;
+/* CSS-only Hamburger Toggle */
+.menu-toggle {
+    display: none; /* Hide the actual checkbox */
+}
+
+.nav-toggle { /* This is the LABEL for the checkbox */
+    display: none; /* Hidden on desktop */
     flex-direction: column;
+    justify-content: space-between; /* Space out the spans */
     cursor: pointer;
-    gap: 4px;
+    width: 25px; /* Define width for better control */
+    height: 18px; /* Define height for 3 bars + 2 gaps */
+    padding: 0; /* No padding needed */
+    background: none;
+    border: none;
 }
 
 .nav-toggle span {
-    width: 25px;
+    width: 100%;
     height: 3px;
     background-color: var(--text-primary);
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    border-radius: 2px;
 }
 
 /* Main Content */
 main {
-    margin-top: 80px;
+    margin-top: 80px; /* Adjust based on header height */
 }
 
 /* Hero Section */
@@ -352,7 +368,7 @@ main {
 }
 
 .footer-brand p {
-    color: #9ca3af;
+    color: var(--text-light);
 }
 
 .footer-column h4 {
@@ -371,7 +387,7 @@ main {
 }
 
 .footer-column ul li a {
-    color: #9ca3af;
+    color: var(--text-light);
     text-decoration: none;
     transition: color 0.2s ease;
 }
@@ -384,46 +400,50 @@ main {
     padding-top: var(--spacing-md);
     border-top: 1px solid #374151;
     text-align: center;
-    color: #9ca3af;
+    color: var(--text-light);
 }
 
-/* Responsive Design */
+/* Responsive Design (HTML & CSS Only for Mobile Menu) */
 @media (max-width: 768px) {
     .nav-links {
         position: fixed;
-        top: 80px;
+        top: 80px; /* Adjust if your header height changes */
         left: 0;
         width: 100%;
-        height: calc(100vh - 80px);
+        height: calc(100vh - 80px); /* Fill remaining viewport height */
         background-color: var(--bg-primary);
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
         padding-top: var(--spacing-2xl);
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
+        transform: translateX(-100%); /* Start off-screen (hidden) */
+        transition: transform 0.3s ease-out; /* Smooth slide animation */
+        z-index: 999; /* Below header, above content */
     }
 
-    .nav-links.active {
+    /* When the hidden checkbox is checked, slide the nav links into view */
+    .menu-toggle:checked ~ .nav-links {
         transform: translateX(0);
     }
 
+    /* Show the hamburger icon */
     .nav-toggle {
         display: flex;
     }
 
-    .nav-toggle.active span:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
+    /* Hamburger to X animation when checkbox is checked */
+    .menu-toggle:checked ~ .nav-toggle span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg); /* Adjusted for center rotation */
     }
-
-    .nav-toggle.active span:nth-child(2) {
+    .menu-toggle:checked ~ .nav-toggle span:nth-child(2) {
         opacity: 0;
     }
-
-    .nav-toggle.active span:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
+    .menu-toggle:checked ~ .nav-toggle span:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg); /* Adjusted for center rotation */
     }
 
+
+    /* General responsive adjustments */
     .hero-content {
         grid-template-columns: 1fr;
         gap: var(--spacing-xl);
