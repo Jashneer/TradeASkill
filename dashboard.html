@@ -1,107 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse Skills - TradeASkill</title>
-    <meta name="description" content="Discover amazing skills available for trading on TradeASkill. Find your perfect skill exchange partner.">
-    <link rel="stylesheet" href="dashboard.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Skills</title>
+  <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav container">
-            <div class="nav-brand">
-                <a href="index.html"><h1>TradeASkill</h1></a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="dashboard.html" class="active">Browse Skills</a></li>
-                <li><a href="profile.html">My Profile</a></li>
-                <li><a href="#" class="btn btn-secondary">Sign Out</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main class="dashboard-main">
-        <div class="container">
-            <section class="dashboard-header">
-                <h2>Discover Skills to Learn</h2>
-                <p>Find the perfect skill trading partner and start your learning journey</p>
-            </section>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">TradeASkill</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="browse.html" class="active">Browse Skills</a></li>
+        <li><a href="profile.html">My Profile</a></li>
+        <li><a href="signup.html" class="btn-outline">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
 
-            <section class="search-filters">
-                <div class="search-container">
-                    <div class="search-bar">
-                        <input type="search" id="skillSearch" placeholder="Search skills..." 
-                               class="search-input">
-                        <button class="search-button" aria-label="Search">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <path d="m21 21-4.35-4.35"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    
-                    <div class="filters">
-                        <select id="categoryFilter" class="filter-select">
-                            <option value="">All Categories</option>
-                            <option value="technology">Technology</option>
-                            <option value="languages">Languages</option>
-                            <option value="arts">Arts & Creative</option>
-                            <option value="music">Music</option>
-                            <option value="business">Business</option>
-                            <option value="cooking">Cooking</option>
-                            <option value="sports">Sports & Fitness</option>
-                        </select>
+  <!-- Search -->
+  <section class="search-section">
+    <input type="text" placeholder="Search skills...">
+    <button type="button">Search</button>
+  </section>
 
-                        <select id="levelFilter" class="filter-select">
-                            <option value="">All Levels</option>
-                            <option value="beginner">Beginner</option>
-                            <option value="intermediate">Intermediate</option>
-                            <option value="advanced">Advanced</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
-
-            <section class="skills-section">
-                <div class="skills-header">
-                    <h3>Available Skills</h3>
-                    <div class="view-toggle">
-                        <button id="gridView" class="view-btn active" aria-label="Grid view">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="7" height="7"></rect>
-                                <rect x="14" y="3" width="7" height="7"></rect>
-                                <rect x="14" y="14" width="7" height="7"></rect>
-                                <rect x="3" y="14" width="7" height="7"></rect>
-                            </svg>
-                        </button>
-                        <button id="listView" class="view-btn" aria-label="List view">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="8" y1="6" x2="21" y2="6"></line>
-                                <line x1="8" y1="12" x2="21" y2="12"></line>
-                                <line x1="8" y1="18" x2="21" y2="18"></line>
-                                <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                                <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                                <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div id="skillsContainer" class="skills-grid">
-                    <!-- Skills will be dynamically loaded here -->
-                </div>
-
-                <div id="noResultsMessage" class="no-results" style="display: none;">
-                    <h3>No skills found</h3>
-                    <p>Try adjusting your search terms or filters</p>
-                </div>
-            </section>
+  <!-- Skills Grid -->
+  <section class="skills-grid">
+    <!-- Card 1 -->
+    <div class="skill-card">
+      <div class="card-header">
+        <h3>Web Development</h3>
+        <span class="tag technology">Technology</span>
+      </div>
+      <p>Learn to build responsive websites using HTML, CSS, and JavaScript.</p>
+      <div class="card-meta">
+        <span class="level beginner">Beginner</span>
+        <span>10 Lessons</span>
+      </div>
+      <div class="instructor">
+        <div class="avatar">A</div>
+        <div>
+          <h4>Aarav Mehta</h4>
+          <span>Instructor</span>
         </div>
-    </main>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">View</button>
+        <button class="btn-outline">Message</button>
+      </div>
+    </div>
 
-    <script src="data.js"></script>
-    <script src="dashboard.js"></script>
+    <!-- Card 2 -->
+    <div class="skill-card">
+      <div class="card-header">
+        <h3>Spoken English</h3>
+        <span class="tag language">Language</span>
+      </div>
+      <p>Enhance your communication skills and fluency in English.</p>
+      <div class="card-meta">
+        <span class="level intermediate">Intermediate</span>
+        <span>8 Lessons</span>
+      </div>
+      <div class="instructor">
+        <div class="avatar">K</div>
+        <div>
+          <h4>Shikha Sharma</h4>
+          <span>Instructor</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">View</button>
+        <button class="btn-outline">Message</button>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="skill-card">
+      <div class="card-header">
+        <h3>Guitar Basics</h3>
+        <span class="tag arts">Arts</span>
+      </div>
+      <p>Start your musical journey with beginner-friendly guitar lessons.</p>
+      <div class="card-meta">
+        <span class="level beginner">Beginner</span>
+        <span>12 Lessons</span>
+      </div>
+      <div class="instructor">
+        <div class="avatar">P</div>
+        <div>
+          <h4>Aryan Kapoor</h4>
+          <span>Instructor</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">View</button>
+        <button class="btn-outline">Message</button>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="skill-card">
+      <div class="card-header">
+        <h3>Python Programming</h3>
+        <span class="tag technology">Technology</span>
+      </div>
+      <p>Master Python programming with hands-on coding practice.</p>
+      <div class="card-meta">
+        <span class="level advanced">Advanced</span>
+        <span>15 Lessons</span>
+      </div>
+      <div class="instructor">
+        <div class="avatar">J</div>
+        <div>
+          <h4>Jashan Kaur</h4>
+          <span>Instructor</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">View</button>
+        <button class="btn-outline">Message</button>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="skill-card">
+      <div class="card-header">
+        <h3>Cooking Basics</h3>
+        <span class="tag arts">Arts</span>
+      </div>
+      <p>Learn delicious and easy-to-make recipes for everyday cooking.</p>
+      <div class="card-meta">
+        <span class="level beginner">Beginner</span>
+        <span>6 Lessons</span>
+      </div>
+      <div class="instructor">
+        <div class="avatar">L</div>
+        <div>
+          <h4>Kritika Verma</h4>
+          <span>Instructor</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">View</button>
+        <button class="btn-outline">Message</button>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="skill-card">
+      <div class="card-header">
+        <h3>Graphic Design</h3>
+        <span class="tag technology">Technology</span>
+      </div>
+      <p>Learn creative design skills with Photoshop and Illustrator.</p>
+      <div class="card-meta">
+        <span class="level intermediate">Intermediate</span>
+        <span>9 Lessons</span>
+      </div>
+      <div class="instructor">
+        <div class="avatar">N</div>
+        <div>
+          <h4>Hardeep Singh</h4>
+          <span>Instructor</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-primary">View</button>
+        <button class="btn-outline">Message</button>
+      </div>
+    </div>
+  </section>
+
 </body>
 </html>
