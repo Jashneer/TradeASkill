@@ -68,10 +68,15 @@ body {
 .search-section {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
   margin: 30px auto;
   max-width: 600px;
+  width: 100%;
+}
+
+.search-section form {
+  display: flex;
+  width: 100%;
+  gap: 10px;
 }
 
 .search-section input {
@@ -80,6 +85,15 @@ body {
   border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 14px;
+  outline: none;
+}
+
+.search-section input:invalid {
+  border-color: #ef4444; /* लाल border अगर invalid है */
+}
+
+.search-section input:valid {
+  border-color: #22c55e; /* हरा border अगर valid है */
 }
 
 .search-section button {

@@ -21,10 +21,17 @@
     </nav>
   </header>
 
-  <!-- Search -->
+  <!-- Search with Form Validation -->
   <section class="search-section">
-    <input type="text" placeholder="Search skills...">
-    <button type="button">Search</button>
+    <form action="browse.html" method="get">
+      <input type="text" 
+             name="search" 
+             placeholder="Search skills..." 
+             required 
+             pattern="[A-Za-z ]{3,}" 
+             title="Please enter at least 3 letters (alphabets only)">
+      <button type="submit">Search</button>
+    </form>
   </section>
 
   <!-- Skills Grid -->
