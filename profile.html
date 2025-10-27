@@ -34,30 +34,30 @@
           </div>
 
           <div class="profile-info">
-            <h2>John Doe</h2>
-            <p class="user-email">john.doe@email.com</p>
+            <h2>Loading...</h2>
+            <p class="user-email">Loading...</p>
             <p class="user-bio">
-              Passionate learner and teacher looking to expand my skillset while sharing my knowledge with others.
+              
             </p>
 
             <div class="profile-stats">
               <div class="stat">
-                <span class="stat-number">4.6</span>
+                <span class="stat-number">0</span>
                 <span class="stat-label">Rating</span>
               </div>
               <div class="stat">
-                <span class="stat-number">5</span>
+                <span class="stat-number">0</span>
                 <span class="stat-label">Trades</span>
               </div>
               <div class="stat">
-                <span class="stat-number">Jan 2025</span>
+                <span class="stat-number">0</span>
                 <span class="stat-label">Member Since</span>
               </div>
             </div>
           </div>
 
           <div class="profile-actions">
-            <button class="btn btn-primary">Edit Profile</button>
+            <button id="editProfileBtn" class="btn btn-primary">Edit Profile</button>
           </div>
         </section>
 
@@ -67,14 +67,11 @@
           <section class="skills-section">
             <header class="section-header">
               <h3>Skills I Can Teach</h3>
-              <a href="dashboard.html" class="btn btn-secondary btn-small">+ Add Skill</a>
+              <button id="addTeachSkillBtn" class="btn btn-secondary btn-small">+ Add Skill</button>
 
             </header>
-            <div class="skills-grid">
-              <span class="skill-tag">HTML</span>
-              <span class="skill-tag">CSS</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">Python</span>
+            <div id="teach-skills" class="skills-grid">
+      
             </div>
           </section>
 
@@ -82,18 +79,16 @@
           <section class="skills-section">
             <header class="section-header">
               <h3>Skills I Want to Learn</h3>
-                <a href="dashboard.html" class="btn btn-secondary btn-small">+ Add Skill</a>
+              <button id="addLearnSkillBtn" class="btn btn-secondary btn-small">+ Add Skill</button>
 
             </header>
-            <div class="skills-grid">
-              <span class="skill-tag">React</span>
-              <span class="skill-tag">Node.js</span>
-              <span class="skill-tag">UI/UX Design</span>
+            <div id="learn-skills" class="skills-grid">
             </div>
           </section>
         </div>
       </div>
     </div>
   </main>
+  <script src="profile.js"></script>
 </body>
 </html>
