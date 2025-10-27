@@ -1,75 +1,64 @@
 // =================================================================
-// Configuration and API Endpoint (Variables / Data Types: String)
+// Configuration and API Endpoint
 // =================================================================
-// The API URL for fetching the skill data (JSON Server is the REST API)
 const API_URL = 'http://localhost:3000/skills'; 
-let allSkills = [];      // Array to store fetched JSON data (Data Types: Array)
-let filteredSkills = []; // Filtered skill subset (Data Types: Array)
-let currentView = 'grid'; // Default view mode (Data Types: String)
+let allSkills = []; 
+let filteredSkills = []; 
+let currentView = 'grid'; 
+let currentSort = 'title-asc'; // Default sort (title ascending)
 
 document.addEventListener('DOMContentLoaded', () => {
 
     // ----------------------------------------------------
-    // DOM Element References (DOM Manipulation)
+    // DOM Element References 
     // ----------------------------------------------------
-    // Variables: const for element references
     const skillsContainer = document.getElementById('skillsContainer');
     const searchInput = document.getElementById('skillSearch');
     const categoryFilter = document.getElementById('categoryFilter');
     const levelFilter = document.getElementById('levelFilter');
+    const sortControl = document.getElementById('sortControl'); 
     const gridViewBtn = document.getElementById('gridView');
     const listViewBtn = document.getElementById('listView');
     const noResultsMessage = document.getElementById('noResultsMessage');
     
-    // JS Validation: Check for critical elements
-    if (!skillsContainer || !searchInput || !categoryFilter || !levelFilter) {
+    if (!skillsContainer || !searchInput || !categoryFilter || !levelFilter || !sortControl) {
         console.error("Dashboard failed to initialize: Missing required HTML elements.");
-        return; // Control Flow: Exiting function early
+        return; 
     }
 
     // ----------------------------------------------------
-    // Core Functions (Functions: async, arrow functions)
+    // Core Functions 
     // ----------------------------------------------------
 
-    /**
-     * Fetch skills data from the mock REST API. (Fetch API / Ajax with JSON Server)
-     */
     async function fetchSkills() {
         try {
-            // Fetch API call
             const response = await fetch(API_URL);
             
-            // JS Validation / Control Flow: Check for HTTP errors
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            // Parse response body as JSON (JSON Objects)
             const data = await response.json();
             
             allSkills = data;
-            filteredSkills = [...allSkills]; // Array: Spread operator
+            // Sort the initial data
+            filteredSkills = sortSkills([...allSkills]); 
             renderSkills(filteredSkills);
 
         } catch (error) {
             console.error('Error fetching skill data:', error);
-            // DOM Manipulation: Inject error message
+            // Display error if server is not running
             skillsContainer.innerHTML = '<p style="text-align:center; color: #dc2626; padding: 20px;">Error loading skills. Please ensure the JSON server is running.</p>';
         }
     }
 
-    /**
-     * Filters the skills based on user input.
-     */
     function applyFilters() {
-        // Variables: Get values
         const searchTerm = searchInput.value.toLowerCase().trim();
         const selectedCategory = categoryFilter.value;
         const selectedLevel = levelFilter.value;
 
-        // Arrays: filter method
-        filteredSkills = allSkills.filter(skill => {
-            // Control Flows: Boolean logic for filtering
+        // 1. Filtering
+        let tempFilteredSkills = allSkills.filter(skill => {
             const matchesSearch = searchTerm === '' || 
                 skill.title.toLowerCase().includes(searchTerm) ||
                 skill.description.toLowerCase().includes(searchTerm) ||
@@ -80,40 +69,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return matchesSearch && matchesCategory && matchesLevel;
         });
+        
+        // 2. Sorting
+        filteredSkills = sortSkills(tempFilteredSkills);
 
         renderSkills(filteredSkills);
     }
+    
+    function sortSkills(skills) {
+        const [sortBy, sortOrder] = currentSort.split('-'); 
 
-    /**
-     * Renders skill cards.
-     */
+        return skills.sort((a, b) => {
+            let comparison = 0;
+            
+            if (sortBy === 'title') {
+                comparison = a.title.localeCompare(b.title);
+            } else if (sortBy === 'rating') {
+                // Descending sort for rating (higher rating first)
+                comparison = a.teacher.rating - b.teacher.rating; 
+            } else if (sortBy === 'duration') {
+                // NOTE: This assumes duration is a simple number or similar.
+                // For your data ('10 Lessons'), direct subtraction works fine.
+                // For more complex time formats, advanced parsing would be needed.
+                
+                // For 'Lesson' count, we can strip the text and parse the number:
+                const parseLessonCount = (d) => parseInt(d.split(' ')[0]) || 0;
+                comparison = parseLessonCount(a.duration) - parseLessonCount(b.duration);
+            }
+
+            // Apply ascending or descending order
+            if (sortOrder === 'desc') {
+                // If sorting by rating (desc) or title (desc)
+                return comparison * -1;
+            } else {
+                // If sorting by duration (asc) or title (asc)
+                return comparison;
+            }
+        });
+    }
+
     function renderSkills(skills) {
-        // Control Flows: If/else block
         if (skills.length === 0) {
-            skillsContainer.style.display = 'none'; // DOM Manipulation: Style change
+            skillsContainer.style.display = 'none'; 
             noResultsMessage.style.display = 'block';
-            return; // Control Flow: Exit
+            return; 
         }
 
-        skillsContainer.style.display = ''; 
+        skillsContainer.style.display = 'grid'; // Ensure grid is visible
         noResultsMessage.style.display = 'none';
         
-        // DOM Manipulation: Change the class to switch view styles
         skillsContainer.className = currentView === 'grid' ? 'skills-grid' : 'skills-list';
         
-        // Arrays: map method and join() for efficient DOM rendering
-        skillsContainer.innerHTML = skills.map(createSkillCard).join(''); // DOM Manipulation: innerHTML injection
+        skillsContainer.innerHTML = skills.map(createSkillCard).join(''); 
 
         addContactListeners();
     }
 
-    /**
-     * Toggles the display mode.
-     */
     function setView(view) {
         currentView = view;
         
-        // DOM Manipulation: Class toggling
         if (gridViewBtn) gridViewBtn.classList.toggle('active', view === 'grid');
         if (listViewBtn) listViewBtn.classList.toggle('active', view === 'list');
         
@@ -121,14 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // ----------------------------------------------------
-    // Card HTML Generation (JSON Objects)
+    // Card HTML Generation
     // ----------------------------------------------------
 
-    /**
-     * Creates the HTML string for a single skill card using template literals.
-     */
     function createSkillCard(skill) {
-        // Accessing nested JSON data (e.g., skill.teacher.name)
         const listViewClass = currentView === 'list' ? 'list-view' : '';
         const teacherInitials = getInitials(skill.teacher.name);
         
@@ -172,15 +182,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event Listeners and Utilities
     // ----------------------------------------------------
 
-    /**
-     * Adds event listeners to dynamically created buttons. (DOM Manipulation)
-     */
     function addContactListeners() {
-        // DOM Manipulation: Selectors
         const contactButtons = document.querySelectorAll('.contact-btn'); 
         const viewButtons = document.querySelectorAll('.btn-primary'); 
 
-        // Control Flow: forEach loop
         contactButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const teacherName = this.dataset.teacherName;
@@ -196,31 +201,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /**
-     * Initializes all primary event listeners.
-     */
     function setupEventListeners() {
-        // DOM Manipulation: Event listeners for form control
         const searchForm = searchInput.closest('.search-form');
+        
+        // FIX: Prevent form submission/page reload
         if (searchForm) {
              searchForm.addEventListener('submit', (e) => e.preventDefault());
         }
         
-        // Event listeners for Filtering (DOM Manipulation)
+        // Event listeners for Filtering
         searchInput.addEventListener('input', applyFilters); // 'input' event for live search
         categoryFilter.addEventListener('change', applyFilters);
         levelFilter.addEventListener('change', applyFilters);
         
+        // Event listener for Sorting
+        sortControl.addEventListener('change', function() {
+            currentSort = this.value; // Update the sort state
+            applyFilters(); // Re-filter and re-sort the skills
+        });
+        
         if (gridViewBtn) gridViewBtn.addEventListener('click', () => setView('grid'));
         if (listViewBtn) listViewBtn.addEventListener('click', () => setView('list'));
     }
+
     function getInitials(name) {
         return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
     }
+
     function capitalizeFirst(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
+    
+    // Initial calls
     setupEventListeners();
     fetchSkills();
-
 });
