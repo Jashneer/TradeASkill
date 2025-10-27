@@ -1,212 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browse Skills - TradeASkill</title>
-  <link rel="stylesheet" href="dashboard.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Skills - TradeASkill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
 
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">TradeASkill</div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="browse.html" class="active">Browse Skills</a></li>
-        <li><a href="profile.html">My Profile</a></li>
-        <li><a href="signup.html" class="btn-outline">Sign Up</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header class="navbar">
+        <div class="logo">TradeASkill</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html" class="active">Browse Skills</a></li>
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a href="signup.html" class="btn-outline">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- Search Section -->
-  <section class="search-section">
-    <form action="browse.html" method="get">
-      <input type="text" 
-             name="search" 
-             placeholder="Search skills..."  
-             pattern="[A-Za-z ]{3,}">
-      <button type="submit">Search</button>
-    </form>
-  </section>
-
-  <!-- Skills Grid -->
-  <section class="skills-grid">
-    <!-- Card 1 --> 
-    <div class="skill-card">
-      <div class="card-header">
-        <h3>Web Development</h3>
-        <span class="tag technology">Technology</span>
-      </div>
-      <p>Learn to build responsive websites using HTML, CSS, and JavaScript.</p>
-      <div class="card-meta">
-        <span class="level beginner">Beginner</span>
-        <span>10 Lessons</span>
-      </div>
-      <div class="instructor">
-        <div class="avatar">A</div>
-        <div>
-          <h4>Aarav Mehta</h4>
-          <span>Instructor</span>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="btn-primary">View</button>
-        <button class="btn-outline">Message</button>
-      </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="skill-card">
-      <div class="card-header">
-        <h3>Spoken English</h3>
-        <span class="tag language">Language</span>
-      </div>
-      <p>Enhance your communication skills and fluency in English.</p>
-      <div class="card-meta">
-        <span class="level intermediate">Intermediate</span>
-        <span>8 Lessons</span>
-      </div>
-      <div class="instructor">
-        <div class="avatar">S</div>
-        <div>
-          <h4>Shikha Sharma</h4>
-          <span>Instructor</span>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="btn-primary">View</button>
-        <button class="btn-outline">Message</button>
-      </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="skill-card">
-      <div class="card-header">
-        <h3>Guitar Basics</h3>
-        <span class="tag arts">Arts</span>
-      </div>
-      <p>Start your musical journey with beginner-friendly guitar lessons.</p>
-      <div class="card-meta">
-        <span class="level beginner">Beginner</span>
-        <span>12 Lessons</span>
-      </div>
-      <div class="instructor">
-        <div class="avatar">A</div>
-        <div>
-          <h4>Aryan Kapoor</h4>
-          <span>Instructor</span>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="btn-primary">View</button>
-        <button class="btn-outline">Message</button>
-      </div>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="skill-card">
-      <div class="card-header">
-        <h3>Python Programming</h3>
-        <span class="tag technology">Technology</span>
-      </div>
-      <p>Master Python programming with hands-on coding practice.</p>
-      <div class="card-meta">
-        <span class="level advanced">Advanced</span>
-        <span>15 Lessons</span>
-      </div>
-      <div class="instructor">
-        <div class="avatar">J</div>
-        <div>
-          <h4>Jashan Kaur</h4>
-          <span>Instructor</span>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="btn-primary">View</button>
-        <button class="btn-outline">Message</button>
-      </div>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="skill-card">
-      <div class="card-header">
-        <h3>Cooking Basics</h3>
-        <span class="tag arts">Arts</span>
-      </div>
-      <p>Learn delicious and easy-to-make recipes for everyday cooking.</p>
-      <div class="card-meta">
-        <span class="level beginner">Beginner</span>
-        <span>6 Lessons</span>
-      </div>
-      <div class="instructor">
-        <div class="avatar">K</div>
-        <div>
-          <h4>Kritika Verma</h4>
-          <span>Instructor</span>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="btn-primary">View</button>
-        <button class="btn-outline">Message</button>
-      </div>
-    </div>
-
-    <!-- Card 6 -->
-    <div class="skill-card">
-      <div class="card-header">
-        <h3>Graphic Design</h3>
-        <span class="tag technology">Technology</span>
-      </div>
-      <p>Learn creative design skills with Photoshop and Illustrator.</p>
-      <div class="card-meta">
-        <span class="level intermediate">Intermediate</span>
-        <span>9 Lessons</span>
-      </div>
-      <div class="instructor">
-        <div class="avatar">H</div>
-        <div>
-          <h4>Hardeep Singh</h4>
-          <span>Instructor</span>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="btn-primary">View</button>
-        <button class="btn-outline">Message</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3>TradeASkill</h3>
-          <p>Connecting learners and teachers worldwide.</p>
+        <section class="controls-section">
+            <form class="search-form" onsubmit="return false;"> 
+                <input type="text" 
+                       id="skillSearch" 
+                       name="search" 
+                       placeholder="Search skills, teachers, or descriptions..." 
+                       pattern="[A-Za-z0-9 ]{3,}"
+                       title="Search term must be at least 3 characters.">
+                </form>
+
+            <div class="filters-and-sort">
+                
+                <select id="categoryFilter" class="filter-control">
+                    <option value="">All Categories</option>
+                    <option value="technology">Technology</option>
+                    <option value="language">Language</option>
+                    <option value="arts">Arts</option>
+                    <option value="business">Business</option>
+                </select>
+
+                <select id="levelFilter" class="filter-control">
+                    <option value="">All Levels</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+
+                <select id="sortControl" class="filter-control">
+                    <option value="title-asc">Sort By: A-Z Title</option>
+                    <option value="title-desc">Sort By: Z-A Title</option>
+                    <option value="rating-desc">Sort By: Highest Rating</option>
+                    <option value="duration-asc">Sort By: Shortest Duration</option>
+                </select>
+
+                <div class="view-toggles">
+                    <button id="gridView" class="active" title="Grid View">
+                        <i class="fas fa-th-large"></i> Grid
+                    </button>
+                    <button id="listView" title="List View">
+                        <i class="fas fa-list"></i> List
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="skillsContainer" class="skills-grid">
+            </section>
+
+        <div id="noResultsMessage" class="no-results-message" style="display: none;">
+            <p>😔 No skills matched your current filters. Try adjusting your search or filters!</p>
         </div>
-        <div class="footer-links">
-          <div class="footer-column">
-            <h4>Platform</h4>
-            <ul>
-              <li><a href="browse.html">Browse Skills</a></li>
-              <li><a href="signup.html">Sign Up</a></li>
-              <li><a href="profile.html">Profile</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h4>Support</h4>
-            <ul>
-              <li><a href="#">Help Center</a></li>
-            </ul>
-          </div>
+    </div> <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>TradeASkill</h3>
+                    <p>Connecting learners and teachers worldwide.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Platform</h4>
+                        <ul>
+                            <li><a href="browse.html">Browse Skills</a></li>
+                            <li><a href="signup.html">Sign Up</a></li>
+                            <li><a href="profile.html">Profile</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </footer>
-  <script src="dashboard.js"></script>
+    </footer>
+    <script src="dashboard.js"></script>
 </body>
 </html>
-
