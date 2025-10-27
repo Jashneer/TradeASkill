@@ -1,3 +1,4 @@
+
 {
   "features": [
     {
@@ -103,6 +104,67 @@
         "rating": 4.6, 
         "completedTrades": 44 
       } 
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "aarav",
+      "teachSkills": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Python"
+      ],
+      "learnSkills": [
+        "React",
+        "Node.js",
+        "UI/UX Design"
+      ],
+      "email": "aarav@chitkara.efu.in",
+      "bio": "assinoate learner"
+    },
+    {
+      "id": "2",
+      "name": "Aarav Sharma",
+      "teachSkills": [
+        "C++",
+        "Java",
+        "GitHub"
+      ],
+      "learnSkills": [
+        "React Native",
+        "MongoDB",
+        "Figma"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Neha Singh",
+      "teachSkills": [
+        "Canva",
+        "Digital Marketing",
+        "SEO"
+      ],
+      "learnSkills": [
+        "Python",
+        "Machine Learning",
+        "Data Analysis"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Rohan Mehta",
+      "teachSkills": [
+        "Photography",
+        "Video Editing",
+        "Premiere Pro"
+      ],
+      "learnSkills": [
+        "UI/UX",
+        "3D Animation",
+        "After Effects"
+      ]
     }
   ]
 }
