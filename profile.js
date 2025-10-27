@@ -1,152 +1,175 @@
 // -------- Profile.js --------
 
-// Load profile data from localStorage or use demo data
-let userProfile = JSON.parse(localStorage.getItem("userProfile")) || {
-  name: "Khushi Verma",
-  email: "khushi@example.com",
-  bio: "Passionate about learning and sharing skills through TradeASkill.",
-  rating: 4.8,
-  trades: 12,
-  memberSince: "2025",
-};
+// Load logged-in user info
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+// If no logged-in user, use guest info
+if (!currentUser) {
+  currentUser = {
+    firstName: "Guest",
+    lastName: "User",
+    email: "guest@example.com",
+    bio: "Welcome to TradeASkill! Sign in to personalize your profile.",
+    skillsToTeach: [],
+    skillsToLearn: [],
+    rating: 0,
+    trades: 0,
+    dateJoined: new Date().toLocaleDateString(),
+  };
+  localStorage.setItem("isLoggedIn", "false");
+} else {
+  localStorage.setItem("isLoggedIn", "true");
+}
 
 // ---- When DOM loads ----
 document.addEventListener("DOMContentLoaded", () => {
   updateProfileDisplay();
   setupEditProfileButton();
-  loadSkills(); // Load saved skills
+  loadSkills();
+  setupAuthButton();
 });
 
-// ---- Function to update displayed profile info ----
+// ---- Function: Update Profile Info ----
 function updateProfileDisplay() {
-  const nameEl = document.querySelector(".profile-info h2");
-  const emailEl = document.querySelector(".user-email");
-  const bioEl = document.querySelector(".user-bio");
+  document.querySelector(".profile-info h2").textContent =
+    `${currentUser.firstName} ${currentUser.lastName}`;
+  document.querySelector(".user-email").textContent = currentUser.email;
+  document.querySelector(".user-bio").textContent = currentUser.bio;
+
   const stats = document.querySelectorAll(".stat-number");
-
-  if (nameEl) nameEl.textContent = userProfile.name;
-  if (emailEl) emailEl.textContent = userProfile.email;
-  if (bioEl) bioEl.textContent = userProfile.bio;
-
-  if (stats.length >= 3) {
-    stats[0].textContent = userProfile.rating;
-    stats[1].textContent = userProfile.trades;
-    stats[2].textContent = userProfile.memberSince;
-  }
+  stats[0].textContent = currentUser.rating || 0;
+  stats[1].textContent = currentUser.trades || 0;
+  stats[2].textContent = currentUser.dateJoined || new Date().toLocaleDateString();
 }
 
-// ---- Setup Edit Profile Button ----
+// ---- Function: Edit Profile ----
 function setupEditProfileButton() {
   const editBtn = document.getElementById("editProfileBtn");
-  if (!editBtn) {
-    console.error("Edit Profile button not found! Make sure it has id='editProfileBtn'");
-    return;
-  }
+  if (!editBtn) return;
 
   editBtn.addEventListener("click", () => {
-    // Ask for each field, stop if Cancel is pressed
-    const newName = prompt("Enter your name:", userProfile.name);
-    if (newName === null) return; // user cancelled
+    const newFirstName = prompt("Enter your first name:", currentUser.firstName);
+    if (newFirstName === null) return;
 
-    const newEmail = prompt("Enter your email:", userProfile.email);
+    const newLastName = prompt("Enter your last name:", currentUser.lastName);
+    if (newLastName === null) return;
+
+    const newEmail = prompt("Enter your email:", currentUser.email);
     if (newEmail === null) return;
 
-    const newBio = prompt("Enter your bio:", userProfile.bio);
+    const newBio = prompt("Enter your bio:", currentUser.bio);
     if (newBio === null) return;
 
-    const newRating = prompt("Enter your rating (0 - 5):", userProfile.rating);
-    if (newRating === null) return;
+    currentUser.firstName = newFirstName.trim() || currentUser.firstName;
+    currentUser.lastName = newLastName.trim() || currentUser.lastName;
+    currentUser.email = newEmail.trim() || currentUser.email;
+    currentUser.bio = newBio.trim() || currentUser.bio;
 
-    const newTrades = prompt("Enter number of trades:", userProfile.trades);
-    if (newTrades === null) return;
-
-    const newMemberSince = prompt("Enter member since year:", userProfile.memberSince);
-    if (newMemberSince === null) return;
-
-    // Update only if input is given, else keep old values
-    userProfile.name = newName.trim() || userProfile.name;
-    userProfile.email = newEmail.trim() || userProfile.email;
-    userProfile.bio = newBio.trim() || userProfile.bio;
-    userProfile.rating = parseFloat(newRating) || userProfile.rating;
-    userProfile.trades = parseInt(newTrades) || userProfile.trades;
-    userProfile.memberSince = newMemberSince.trim() || userProfile.memberSince;
-
-    // Save to localStorage
-    localStorage.setItem("userProfile", JSON.stringify(userProfile));
-
-    // Update display instantly
+    saveProfile();
     updateProfileDisplay();
+    alert("Profile updated successfully!");
   });
 }
 
-// ---- Skill Storage in LocalStorage ----
+// ---- Function: Manage Skills ----
 function loadSkills() {
-  const teachSkills = JSON.parse(localStorage.getItem("teachSkills")) || [];
-  const learnSkills = JSON.parse(localStorage.getItem("learnSkills")) || [];
-
   const teachContainer = document.getElementById("teach-skills");
   const learnContainer = document.getElementById("learn-skills");
+  teachContainer.innerHTML = "";
+  learnContainer.innerHTML = "";
 
-  if (teachContainer) teachContainer.innerHTML = "";
-  if (learnContainer) learnContainer.innerHTML = "";
+  (currentUser.skillsToTeach || []).forEach(skill =>
+    addSkillTag(skill, teachContainer, "teach")
+  );
+  (currentUser.skillsToLearn || []).forEach(skill =>
+    addSkillTag(skill, learnContainer, "learn")
+  );
 
-  teachSkills.forEach(skill => addSkillTag(skill, teachContainer));
-  learnSkills.forEach(skill => addSkillTag(skill, learnContainer));
+  setupSkillButtons();
 }
 
-// ---- Function to add skill tag ----
-function addSkillTag(skill, container) {
-  if (!container) return;
+function addSkillTag(skill, container, type) {
   const span = document.createElement("span");
   span.classList.add("skill-tag");
   span.textContent = skill;
 
-  // Add remove option (X)
   const removeBtn = document.createElement("button");
   removeBtn.textContent = " ✖";
   removeBtn.classList.add("remove-btn");
   removeBtn.onclick = () => {
     span.remove();
-    saveSkills();
+    removeSkill(skill, type);
   };
 
   span.appendChild(removeBtn);
   container.appendChild(span);
 }
 
-// ---- Add new skill ----
-const addTeachBtn = document.getElementById("addTeachSkillBtn");
-const addLearnBtn = document.getElementById("addLearnSkillBtn");
+function setupSkillButtons() {
+  const addTeachBtn = document.getElementById("addTeachSkillBtn");
+  const addLearnBtn = document.getElementById("addLearnSkillBtn");
 
-if (addTeachBtn) {
-  addTeachBtn.addEventListener("click", () => {
-    const skill = prompt("Enter a skill you can teach:");
-    if (skill && skill.trim() !== "") {
-      const container = document.getElementById("teach-skills");
-      addSkillTag(skill.trim(), container);
-      saveSkills();
-    }
-  });
+  if (addTeachBtn) {
+    addTeachBtn.addEventListener("click", () => {
+      const skill = prompt("Enter a skill you can teach:");
+      if (skill && skill.trim() !== "") {
+        currentUser.skillsToTeach.push(skill.trim());
+        saveProfile();
+        loadSkills();
+      }
+    });
+  }
+
+  if (addLearnBtn) {
+    addLearnBtn.addEventListener("click", () => {
+      const skill = prompt("Enter a skill you want to learn:");
+      if (skill && skill.trim() !== "") {
+        currentUser.skillsToLearn.push(skill.trim());
+        saveProfile();
+        loadSkills();
+      }
+    });
+  }
 }
 
-if (addLearnBtn) {
-  addLearnBtn.addEventListener("click", () => {
-    const skill = prompt("Enter a skill you want to learn:");
-    if (skill && skill.trim() !== "") {
-      const container = document.getElementById("learn-skills");
-      addSkillTag(skill.trim(), container);
-      saveSkills();
-    }
-  });
+function removeSkill(skill, type) {
+  if (type === "teach") {
+    currentUser.skillsToTeach = currentUser.skillsToTeach.filter(s => s !== skill);
+  } else {
+    currentUser.skillsToLearn = currentUser.skillsToLearn.filter(s => s !== skill);
+  }
+  saveProfile();
 }
 
-// ---- Save skills to localStorage ----
-function saveSkills() {
-  const teachSkills = Array.from(document.querySelectorAll("#teach-skills .skill-tag"))
-    .map(tag => tag.firstChild.textContent.trim());
-  const learnSkills = Array.from(document.querySelectorAll("#learn-skills .skill-tag"))
-    .map(tag => tag.firstChild.textContent.trim());
+function saveProfile() {
+  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+}
 
-  localStorage.setItem("teachSkills", JSON.stringify(teachSkills));
-  localStorage.setItem("learnSkills", JSON.stringify(learnSkills));
+// ---- Function: Sign In / Out Button ----
+function setupAuthButton() {
+  const authBtn = document.getElementById("authBtn");
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+  if (isLoggedIn) {
+    authBtn.textContent = "Sign Out";
+  } else {
+    authBtn.textContent = "Sign In";
+  }
+
+  authBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    if (authBtn.textContent === "Sign Out") {
+      const confirmLogout = confirm("Are you sure you want to sign out?");
+      if (confirmLogout) {
+        localStorage.removeItem("currentUser");
+        localStorage.setItem("isLoggedIn", "false");
+        authBtn.textContent = "Sign In";
+        window.location.reload();
+      }
+    } else {
+      // Go to login/signup page (change this if needed)
+      window.location.href = "signup.html";
+    }
+  });
 }

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Profile - TradeASkill</title>
-  <meta name="description" content="Manage your TradeASkill profile, skills, and trading preferences.">
-  <link rel="stylesheet" href="profile.css">
+  <meta name="description" content="Manage your TradeASkill profile, skills, and trading preferences." />
+  <link rel="stylesheet" href="profile.css" />
 </head>
 <body>
   <!-- Header -->
@@ -18,7 +18,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="dashboard.html">Browse Skills</a></li>
         <li><a href="profile.html" class="active">My Profile</a></li>
-        <li><a href="#" class="btn btn-secondary">Sign Out</a></li>
+        <li><a id="authBtn" href="#" class="btn btn-secondary">Sign In</a></li>
       </ul>
     </nav>
   </header>
@@ -36,9 +36,7 @@
           <div class="profile-info">
             <h2>Loading...</h2>
             <p class="user-email">Loading...</p>
-            <p class="user-bio">
-              
-            </p>
+            <p class="user-bio"></p>
 
             <div class="profile-stats">
               <div class="stat">
@@ -68,11 +66,8 @@
             <header class="section-header">
               <h3>Skills I Can Teach</h3>
               <button id="addTeachSkillBtn" class="btn btn-secondary btn-small">+ Add Skill</button>
-
             </header>
-            <div id="teach-skills" class="skills-grid">
-      
-            </div>
+            <div id="teach-skills" class="skills-grid"></div>
           </section>
 
           <!-- Learn Skills -->
@@ -80,15 +75,14 @@
             <header class="section-header">
               <h3>Skills I Want to Learn</h3>
               <button id="addLearnSkillBtn" class="btn btn-secondary btn-small">+ Add Skill</button>
-
             </header>
-            <div id="learn-skills" class="skills-grid">
-            </div>
+            <div id="learn-skills" class="skills-grid"></div>
           </section>
         </div>
       </div>
     </div>
   </main>
+
   <script src="profile.js"></script>
 </body>
 </html>
